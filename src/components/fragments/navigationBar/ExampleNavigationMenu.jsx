@@ -16,8 +16,58 @@ import Person from '@mui/icons-material/Person';
 import Apps from '@mui/icons-material/Apps';
 import FactCheck from '@mui/icons-material/FactCheck';
 import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
-import ModeToggle from '../../Login';
+import { useColorScheme } from '@mui/joy/styles';
+import Button from '@mui/joy/Button';
+import Sheet from '@mui/joy/Sheet';
+import Switch from '@mui/joy/Switch';
 
+
+
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // necessary for server-side rendering
+  // because mode is undefined on the server
+  
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return <Button variant="soft">Change mode</Button>;
+  }
+  return (
+    <div>
+      <Sheet sx={{
+        display:'flex',
+        alignContent:'center',
+        justifyContent: 'space-between',
+        backgroundColor : "transparent",
+      }}>
+
+      <Switch
+      sx={
+        {
+          my:1.5,
+          mx:2,
+        }
+      }
+        color="primary"
+        size="lg"
+        variant="outlined"
+        
+        onChange={()=>{
+          setMode(mode === 'light' ? 'dark' : 'light');
+        }}>
+
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+      </Switch>
+      </Sheet>
+
+  </div>
+
+  );
+}
 
 const useRovingIndex = (options) => {
   const {
@@ -341,6 +391,9 @@ export default function ExampleNavigationMenu() {
             focusPrevious={focusPrevious}
             {...getTargetProps(2)}
           />
+        </ListItem>
+        <ListItem>
+        <ModeToggle />
         </ListItem>
       </List>
     </Box>

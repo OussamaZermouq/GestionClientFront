@@ -25,7 +25,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/index" element={<GestionClient />} />
+            <Route path="/GestionClient" element={<GestionClient />} />
           </Routes>
         </Router>
     </CssVarsProvider>

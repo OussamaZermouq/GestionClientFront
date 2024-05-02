@@ -104,20 +104,7 @@ export default function LoginFinal() {
       } else {
         const token = 'Bearer ' + res.data.access_token;
         authenticationService.setUpToken(token);
-        navigate('/index');
-
-        // Note: I'm not sure why you are calling LoginService again here
-        // You may want to handle this differently
-        // const response = await LoginService(credentials.email, credentials.password);
-        // if (response.status !== 200){
-        //   setLoginState((prevState) =>({
-        //     ...prevState,
-        //     showErrorMessage : false,
-        //   }));
-        // } else {
-        //   authenticationService.registerSuccessfullLoginUser(credentials.email);
-        //   navigate('/index');
-        // }
+        navigate('/GestionClient');
       }
     }
   };
