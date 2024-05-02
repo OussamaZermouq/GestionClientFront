@@ -11,9 +11,16 @@ import CardActions from '@mui/joy/CardActions';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import SvgIcon from '@mui/joy/SvgIcon';
+import { useNavigate } from "react-router-dom";
+
 
 export default function BioCard(props) {
-    console.log(props);
+  const navigate = useNavigate();
+  const EditClicked = (id,e)=>{
+    e.preventDefault();
+    navigate(`/GestionClient/update/?id=${id}`);
+  };
+
   return (
     <Card
       sx={{
@@ -35,12 +42,13 @@ export default function BioCard(props) {
             borderColor: 'background.surface',
           }}
         >
-          {props.client.status==='OK'?'Active':'Inactive'}
+          {props.client.status}
         </Chip>
         <Typography level="title-lg">{props.client.client_nom}</Typography>
         <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>
           Email : {props.client.email} <br />
-          Telephone  : {props.client.telephone}
+          Telephone  : {props.client.telephone}<br />
+          Adresse  : {props.client.adresse}
         </Typography>
         <Box
           sx={{
@@ -119,8 +127,10 @@ export default function BioCard(props) {
       <CardOverflow sx={{ bgcolor: 'background.level1' }}>
         <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
-            <Button>Message</Button>
-            <Button>Connect</Button>
+            <Button onClick={(e) =>EditClicked(props.client.client_id,e)}>Edit</Button>
+            <Button variant="contained" color="error">
+            Delete
+            </Button>
           </ButtonGroup>
         </CardActions>
       </CardOverflow>

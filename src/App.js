@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Login from './components/Login';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import GestionClient from './components/GestionClient/GestionClient.jsx';
+import UpdateClient from './components/GestionClient/UpdateClient';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/GestionClient" element={<GestionClient />} />
+            <Route path="/GestionClient/update" element={<UpdateClient />} />
           </Routes>
         </Router>
     </CssVarsProvider>
