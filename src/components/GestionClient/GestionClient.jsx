@@ -17,7 +17,6 @@ export default function GestionClient(){
     useEffect(() => {
         async function fetchClients() {
             const data = await getClients();
-            console.log("data : ", data)
             setClientData(data);
         }
         fetchClients();
@@ -39,8 +38,7 @@ export default function GestionClient(){
                     container
                     rowSpacing={5}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                    sx={{ width: '100%', alignItems: "center" }}
-                >
+                    sx={{ width: '100%', alignItems: "center" }}>
                     {clientData && clientData.map(client => (
                         <Grid key={client.id} xs={2} sm={4} md={4} >
                             <Item>

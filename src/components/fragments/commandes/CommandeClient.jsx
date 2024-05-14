@@ -7,7 +7,15 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-export default function CommandeClient() {
+
+
+export default function CommandeClient(props) {
+  const [commandeData, setCommandeData] = React.useState(props);
+
+  React.useEffect(() => {
+    setCommandeData(props.CommandeData); // Update commandeData when props.CommandeData changes
+  }, [props.CommandeData]); // This will run the effect whenever props.CommandeData changes
+
   return (
     <Box
       sx={{
@@ -16,7 +24,10 @@ export default function CommandeClient() {
         overflow: { xs: 'auto', sm: 'initial' },
       }}
     >
-      <Card
+  
+      
+      {commandeData.commande && commandeData.commande.map(commande => (
+        <Card
         orientation="horizontal"
         sx={{
           width: '100%',
@@ -27,15 +38,16 @@ export default function CommandeClient() {
               'clamp(0px, (calc(var(--stack-point) - 2 * var(--Card-padding) - 2 * var(--variant-borderWidth, 0px)) + 1px - 100%) * 999, 100%)',
           },
           overflow: 'auto',
+          marginBottom:2,
           resize: 'horizontal',
         }}
-      >
+        >
         <CardContent>
           <Typography fontSize="xl" fontWeight="lg">
-            Commande ID : #
+            Commande ID : {commande.commande_id}
           </Typography>
           <Typography level="body-sm" fontWeight="lg" textColor="text.tertiary">
-            Commande Status :
+            Commande Titre : {commande.commande_titre}
           </Typography>
           <Sheet
             sx={{
@@ -50,15 +62,15 @@ export default function CommandeClient() {
           >
             <div>
               <Typography level="body-xs" fontWeight="lg">
-                Produit :
+                Date :
               </Typography>
-              <Typography fontWeight="lg">34</Typography>
+              <Typography fontWeight="lg">{commande.commande_date}</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Quantitee
               </Typography>
-              <Typography fontWeight="lg">980</Typography>
+              <Typography fontWeight="lg">{commande.quantitee}</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
@@ -78,7 +90,8 @@ export default function CommandeClient() {
             </Button>
           </Box>
         </CardContent>
-      </Card>
+        </Card>
+      ))}
     </Box>
   );
 }

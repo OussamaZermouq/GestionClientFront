@@ -95,7 +95,6 @@ export default function LoginFinal() {
         credentials.email, 
         credentials.password
       );
-      console.log(res.data);
       if (res.status !== 200){
         setLoginState((prevState) => ({
           ...prevState,

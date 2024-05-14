@@ -15,7 +15,6 @@ export default function ClientProfile(props){
     useEffect(() => {
         async function fetchClient() {
             const data = await getClientsById(props.client_id);
-            console.log("data : ", data)
             setClientData(data);
         }
         fetchClient();
@@ -58,7 +57,7 @@ export default function ClientProfile(props){
         <Grid xs={6}>
         <Box sx={{ width: 700, my:20 }}>
             <h1>Commandes :</h1>
-            <CommandeClient />
+            {clientData && <CommandeClient CommandeData={clientData} />}
         </Box>
         </Grid>
     </Grid>

@@ -5,12 +5,8 @@ const BASE_URL = 'http://localhost:8080/api/v1/client';
 async function getClients() {
     const TOKEN = localStorage.getItem('token');
     
-    // Check if token exists
     if (!TOKEN) {
-        // Redirect to login page or handle the absence of token
         console.error('Token not found. Redirecting to login page...');
-        
-        // Example: window.location.href = '/login';
         return null;
     }
 
