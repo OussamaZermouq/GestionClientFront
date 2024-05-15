@@ -7,14 +7,21 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import UpdateClient from '../../GestionClient/UpdateClient';
+
+
+function onClick(id){
+  const data = UpdateClient(id);
+  console.log(data);
+}
 
 
 export default function CommandeClient(props) {
   const [commandeData, setCommandeData] = React.useState(props);
 
   React.useEffect(() => {
-    setCommandeData(props.CommandeData); // Update commandeData when props.CommandeData changes
-  }, [props.CommandeData]); // This will run the effect whenever props.CommandeData changes
+    setCommandeData(props.CommandeData); 
+  }, [props.CommandeData]); 
 
   return (
     <Box
