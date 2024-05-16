@@ -17,25 +17,20 @@ import Apps from '@mui/icons-material/Apps';
 import FactCheck from '@mui/icons-material/FactCheck';
 import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
 import { useColorScheme } from '@mui/joy/styles';
-import Button from '@mui/joy/Button';
 import Sheet from '@mui/joy/Sheet';
 import Switch from '@mui/joy/Switch';
+import CategoryIcon from '@mui/icons-material/Category';
+import { useNavigate } from "react-router-dom";
 
 
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+
 
   // necessary for server-side rendering
   // because mode is undefined on the server
   
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return <Button variant="soft">Change mode</Button>;
-  }
   return (
     <div>
       <Sheet sx={{
@@ -156,6 +151,9 @@ const AboutMenu = React.forwardRef(({ focusNext, focusPrevious, ...props }, ref)
 
   const open = Boolean(anchorEl);
   const id = open ? 'about-popper' : undefined;
+  const navigate = useNavigate();
+
+
   return (
     <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
       <div onMouseLeave={() => setAnchorEl(null)}>
@@ -185,12 +183,12 @@ const AboutMenu = React.forwardRef(({ focusNext, focusPrevious, ...props }, ref)
             ...(open && theme.variants.plainHover.neutral),
           })}
         >
-          About <KeyboardArrowDown />
+          Gerer <KeyboardArrowDown />
         </ListItemButton>
         <Popper id={id} open={open} anchorEl={anchorEl} disablePortal keepMounted>
           <List
             role="menu"
-            aria-label="About"
+            aria-label="Gerer"
             variant="outlined"
             sx={{
               boxShadow: 'md',
@@ -202,27 +200,38 @@ const AboutMenu = React.forwardRef(({ focusNext, focusPrevious, ...props }, ref)
             }}
           >
             <ListItem role="none">
-              <ListItemButton role="menuitem" {...getTargetProps(0)}>
+              <ListItemButton onClick={()=>(navigate('/GestionClient'))} role="menuitem" {...getTargetProps(0)}>
                 <ListItemDecorator>
-                  <Apps />
+                <Person />
                 </ListItemDecorator>
-                Overview
+                Clients
               </ListItemButton>
             </ListItem>
+            
             <ListItem role="none">
               <ListItemButton role="menuitem" {...getTargetProps(1)}>
                 <ListItemDecorator>
-                  <Person />
+                <FactCheck />
                 </ListItemDecorator>
-                Administration
+                Commandes
               </ListItemButton>
             </ListItem>
+
             <ListItem role="none">
               <ListItemButton role="menuitem" {...getTargetProps(2)}>
                 <ListItemDecorator>
-                  <FactCheck />
+                  <Apps />
                 </ListItemDecorator>
-                Facts
+                Produits
+              </ListItemButton>
+            </ListItem>
+            
+            <ListItem role="none">
+              <ListItemButton role="menuitem" {...getTargetProps(2)}>
+                <ListItemDecorator>
+                  <CategoryIcon />
+                </ListItemDecorator>
+                Categories
               </ListItemButton>
             </ListItem>
           </List>

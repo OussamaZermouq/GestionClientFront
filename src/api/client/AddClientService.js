@@ -1,8 +1,8 @@
 import axios from '../Configuration/CustomAxiosConfig';
-const BASE_URL = 'http://localhost:8080/api/v1/client';
+const BASE_URL = 'http://localhost:8080/api/v1/client/addClient';
 
 
-async function getClients() {
+async function ajouterClient(client) {
     const TOKEN = localStorage.getItem('token');
     
     if (!TOKEN) {
@@ -11,13 +11,13 @@ async function getClients() {
     }
 
     try {
-        const response = await axios.get(BASE_URL);
-        return response.data;
+        const response = await axios.post(BASE_URL, client);
+        return response.status;
     } catch (error) {
-        console.error('Error fetching clients:', error);
+        console.error('Error sending the request :', error);
         return null;
     }
 }
 
 
-export default getClients;
+export default ajouterClient;

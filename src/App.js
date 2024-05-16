@@ -6,6 +6,7 @@ import Login from './components/Login';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import GestionClient from './components/GestionClient/GestionClient.jsx';
 import UpdateClient from './components/GestionClient/UpdateClient';
+import AjouterClient from './components/GestionClient/AjouterClient';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/GestionClient" element={<GestionClient />} />
             <Route path="/GestionClient/update" element={<UpdateClient />} />
+            <Route path='/GestionClient/ajouter' element={<AjouterClient />}/>
           </Routes>
         </Router>
     </CssVarsProvider>

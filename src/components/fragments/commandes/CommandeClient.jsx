@@ -7,17 +7,16 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import UpdateClient from '../../GestionClient/UpdateClient';
-
-
-function onClick(id){
-  const data = UpdateClient(id);
-  console.log(data);
-}
+import ModalFragment from '../../fragments/commandes/ModalFragment'
 
 
 export default function CommandeClient(props) {
   const [commandeData, setCommandeData] = React.useState(props);
+
+  const [openModalvar, setopenModal] = React.useState(false);
+  function openModal(){
+    setopenModal(!openModalvar);
+  }
 
   React.useEffect(() => {
     setCommandeData(props.CommandeData); 
@@ -31,8 +30,6 @@ export default function CommandeClient(props) {
         overflow: { xs: 'auto', sm: 'initial' },
       }}
     >
-  
-      
       {commandeData.commande && commandeData.commande.map(commande => (
         <Card
         orientation="horizontal"
@@ -87,7 +84,7 @@ export default function CommandeClient(props) {
             </div>
           </Sheet>
           <Box sx={{ display: 'flex', gap: 1.5, '& > button': { flex: 1 } }}>
-            <Button variant="solid" color="danger">
+            <Button variant="solid" color="danger" onClick={()=>setopenModal(true)}>
                 <DeleteIcon />
                 Supprimer
             </Button>
@@ -99,6 +96,7 @@ export default function CommandeClient(props) {
         </CardContent>
         </Card>
       ))}
+      <ModalFragment open={openModalvar}/>
     </Box>
   );
 }
