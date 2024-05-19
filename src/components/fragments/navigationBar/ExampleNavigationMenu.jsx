@@ -299,7 +299,7 @@ const AdmissionsMenu = React.forwardRef(
               ...(open && theme.variants.plainHover.neutral),
             })}
           >
-            Admissions <KeyboardArrowDown />
+            Marketing <KeyboardArrowDown />
           </ListItemButton>
           <Popper id={id} open={open} anchorEl={anchorEl} disablePortal keepMounted>
             <List
@@ -312,34 +312,22 @@ const AdmissionsMenu = React.forwardRef(
                 borderRadius: 'sm',
                 minWidth: 180,
                 '--List-radius': '8px',
-                '--List-padding': '4px',
+                '--List-padding': '4Gpx',
                 '--ListDivider-gap': '4px',
               }}
             >
               <ListItem role="none">
                 <ListItemButton role="menuitem" {...getTargetProps(0)}>
-                  <ListItemContent>Apply</ListItemContent>
-                  <Chip size="sm" variant="soft" color="danger">
-                    Last 2 days!
-                  </Chip>
+                  <ListItemContent>Consulter</ListItemContent>
                 </ListItemButton>
               </ListItem>
               <ListDivider />
-              <ListItem role="none">
-                <ListItemButton role="menuitem" {...getTargetProps(1)}>
-                  Visit
-                </ListItemButton>
-              </ListItem>
+
               <ListItem
                 role="none"
-                endAction={
-                  <IconButton variant="outlined" color="neutral" size="sm">
-                    <BookmarkAdd />
-                  </IconButton>
-                }
               >
                 <ListItemButton role="menuitem" {...getTargetProps(2)}>
-                  Photo tour
+                  Parametre de suggestion
                 </ListItemButton>
               </ListItem>
             </List>

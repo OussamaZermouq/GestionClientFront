@@ -16,11 +16,16 @@ export default function BioCard(props) {
     e.preventDefault();
     navigate(`/GestionClient/update/?id=${id}`);
   };
-
+  const handleDelete = () => {
+    // Call the toggleModal function passed as a prop and pass the client ID
+    props.toggleModal(props.client.client_id);
+  };
+  
   return (
     <Card
       sx={{
-        width: 320,
+        width: 350,
+        height:310,
         maxWidth: '100%',
         boxShadow: 'lg',
       }}
@@ -41,7 +46,7 @@ export default function BioCard(props) {
           {props.client.status}
         </Chip>
         <Typography level="title-lg">{props.client.client_nom}</Typography>
-        <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>
+        <Typography level="body-sm" sx={{ maxWidth: '100%', justifyContent:'flex-start', alignItems:'flex-start' }}>
           Email : {props.client.email} <br />
           Telephone  : {props.client.telephone}<br />
           Adresse  : {props.client.adresse}
@@ -51,9 +56,9 @@ export default function BioCard(props) {
         <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
             <Button onClick={(e) =>EditClicked(props.client.client_id,e)}>Edit</Button>
-            <Button variant="danger" color="error">
+            <Button size="md" variant="plain" color="danger" onClick={handleDelete}>
               Delete
-            </Button>
+          </Button>
           </ButtonGroup>
         </CardActions>
       </CardOverflow>

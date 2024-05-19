@@ -9,8 +9,7 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 
 export default function AlertDialogModal(props) {
-  const [open, setOpen] = React.useState(props.open);
-  console.log(open);
+  const [open, setOpen] = React.useState(true);
   return (
     <React.Fragment>
       <Modal open={open} onClose={() => setOpen(false)}>
@@ -21,14 +20,14 @@ export default function AlertDialogModal(props) {
           </DialogTitle>
           <Divider />
           <DialogContent>
-            Are you sure you want to discard all of your notes?
+            Voulez vous vraiment supprimer cette commande
           </DialogContent>
           <DialogActions>
             <Button variant="solid" color="danger" onClick={() => setOpen(false)}>
-              Discard notes
+              Supprimer
             </Button>
             <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
-              Cancel
+              Annuler
             </Button>
           </DialogActions>
         </ModalDialog>
