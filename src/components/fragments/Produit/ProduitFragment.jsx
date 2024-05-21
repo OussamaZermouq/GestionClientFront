@@ -8,54 +8,51 @@ import Chip from '@mui/joy/Chip';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-
+import Box from '@mui/joy/Box';
 
 export default function ProductCard(props) {
     const [produitData, setProduitData] = React.useState(props.produitData);
 
     
+    // example de structure
+    // {
+    //     "id_produit": 63,
+    //     "titre_produit": "Produit 1",
+    //     "type": "Telephone",
+    //     "couleur": "Blanc",
+    //     "prix": 4000.0,
+    //     "categorie": {
+    //         "category_id": 1,
+    //         "titre": "Electronique",
+    //         "description": "Produits d'électronique générale."
+    //     }
+    // }
     return (
         <Card sx={{ width: 320, maxWidth: '100%', boxShadow: 'lg' }}>
-        <CardOverflow>
-            <AspectRatio sx={{ minWidth: 200 }}>
-            <img
-                src="https://images.unsplash.com/photo-1593121925328-369cc8459c08?auto=format&fit=crop&w=286"
-                srcSet="https://images.unsplash.com/photo-1593121925328-369cc8459c08?auto=format&fit=crop&w=286&dpr=2 2x"
-                loading="lazy"
-                alt=""
-            />
-            </AspectRatio>
-        </CardOverflow>
+        
         <CardContent>
-            <Typography level="body-xs">Bluetooth Headset</Typography>
-            <Link
-            href="#product-card"
-            fontWeight="md"
-            color="neutral"
-            textColor="text.primary"
-            overlay
-            endDecorator={<ArrowOutwardIcon />}
-            >
-            Super Rockez A400
-            </Link>
+            <Typography level="body-xs"><Chip
+              color="primary"
+              variant="solid"
+            >{produitData.categorie.titre}</Chip></Typography>
+            <Typography >
+                {produitData.titre_produit}
+            </Typography>
+            <Box>
 
-            <Typography
-            level="title-lg"
-            sx={{ mt: 1, fontWeight: 'xl' }}
-            endDecorator={
-                <Chip component="span" size="sm" variant="soft" color="success">
-                Lowest price
-                </Chip>
-            }
-            >
-            2,900 THB
+            Couleur
+            <Chip>
+                 {produitData.couleur}
+            </Chip>
+            </Box>
+            <Typography>
+            {produitData.prix} MAD
             </Typography>
             <Typography level="body-sm">
-            (Only <b>7</b> left in stock!)
             </Typography>
         </CardContent>
         <CardOverflow>
-            <Button variant="solid" color="danger" size="lg">
+            <Button variant="plain"  size="lg" endDecorator={<ArrowOutwardIcon/>}>
             Plus de detail
             </Button>
         </CardOverflow>

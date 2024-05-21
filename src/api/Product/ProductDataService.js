@@ -18,3 +18,5 @@ async function getProduitById(product_id){
     }
 
 }
+
+export default getProduitById;

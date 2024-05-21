@@ -106,7 +106,12 @@ export default function GestionClient(){
                 ></Input>
             </Stack>
             
-            <Box sx={{ p: 10, border: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ 
+              p: 10, 
+              border: 'none', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center'}}>
                 <Grid
                     container 
                     justifyContent="center"

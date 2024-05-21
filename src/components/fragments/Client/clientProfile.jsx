@@ -19,49 +19,35 @@ import getProduitById from '../../../api/Product/ProductDataService';
 export default function ClientProfile(props){
 
     const [clientData, setClientData] = useState(null);
-    const [recommendations, setRecommendations] = useState(null);
-    const [recommendedProducts , setrecommendedProducts] = useState(null);
-    
-    useEffect(() => {
-        async function fetchRecommendations() {
-            const data = await getRecommendations(props.client_id);
-            console.log(data);
-            setRecommendations(data);
-        }
-        fetchRecommendations();
-    }, []);
-    
-    //we need a function that fetches the products by their id from the recommendations object and then append 
-    //them to a list which will be passed as a prop to the ProduitFragment
-    
+    const [recommendedProducts, setRecommendedProducts] = useState([]);
 
+    // Fetch client data once
     useEffect(() => {
         async function fetchClient() {
             const data = await getClientsById(props.client_id);
             setClientData(data);
         }
         fetchClient();
-       
-    }, []);
+    }, [props.client_id]);
 
-    
-    // useEffect(() => {
-    //     async function fetchProducts(client_id) {
-    //         const data = await getProduitById(props.client_id);
-    //         setClientData(data);
-    //     }
-    //     fetchClient();
-       
-    // }, []);
+    // Fetch recommendations and their corresponding products once
+    useEffect(() => {
+        async function fetchRecommendationsAndProducts() {
+            const recommendations = await getRecommendations(props.client_id);
+            const productIds = recommendations[props.client_id];
+            const products = await Promise.all(productIds.map(id => getProduitById(id)));
+            setRecommendedProducts(products);
+        }
+        fetchRecommendationsAndProducts();
+    }, [props.client_id]);
+
     function handleSubmit(e) {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         updateClient(props.client_id, formJson);
-      }
-      
-      
+    }
     return(
 
         <Grid
@@ -116,12 +102,18 @@ export default function ClientProfile(props){
 
          </Grid>
          </Box>
-        <Box>
-            <Grid xs={8}>
-                 <h1>Produits Suggérés :</h1>
-                    <ProductCard />
-            </Grid>
-        </Box>
+
+
+    <Box sx={{ flexGrow: 1 }}>
+    <h1>Produits Suggérés :</h1>
+    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {recommendedProducts && recommendedProducts.map(product => (
+        <Grid xs={2} sm={4} md={4} >
+            <ProductCard produitData={product}/>
+        </Grid>
+        ))}
+        </Grid>
+    </Box>
     </Grid>
 
     );
