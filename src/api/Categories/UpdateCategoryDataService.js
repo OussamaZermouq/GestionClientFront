@@ -1,8 +1,8 @@
 import axios from '../Configuration/CustomAxiosConfig';
+const BASE_URL = 'http://localhost:8080/api/v1/category/modifyCategory/';
 
-const BASE_URL = 'http://localhost:8080/api/v1/produit'
 
-export default async function getProduits(){
+async function updateClient(idCategory, newCategory) {
     const TOKEN = localStorage.getItem('token');
     
     if (!TOKEN) {
@@ -10,10 +10,12 @@ export default async function getProduits(){
         return null;
     }
     try {
-        const response = await axios.get(BASE_URL);
+        const response = await axios.put(BASE_URL+idCategory,newCategory);
         return response.data;
     } catch (error) {
-        console.error('Error fetching Products:', error);
+        console.error('Error updating category:', error);
         return null;
     }
 }
+
+export default updateClient;

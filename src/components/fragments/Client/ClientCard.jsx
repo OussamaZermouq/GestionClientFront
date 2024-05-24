@@ -55,7 +55,7 @@ export default function BioCard(props) {
       <CardOverflow sx={{ bgcolor: 'background.level1' }}>
         <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
-            <Button onClick={(e) =>EditClicked(props.client.client_id,e)}>Edit</Button>
+            <Button onClick={(e) =>EditClicked(props.client.client_id,e)}>Consulter</Button>
             <Button size="md" variant="plain" color="danger" onClick={handleDelete}>
               Delete
           </Button>

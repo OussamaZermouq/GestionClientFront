@@ -10,60 +10,22 @@ import Chip from '@mui/joy/Chip';
 import CloseIcon from '@mui/icons-material/Close';
 import Stack from '@mui/joy/Stack';
 import EditIcon from '@mui/icons-material/Edit';
-import deleteCategory from '../../../api/Categories/DeleteCategoryDataService';
-import DialogTitle from '@mui/joy/DialogTitle';
-import Button from '@mui/joy/Button';
-import DialogContent from '@mui/joy/DialogContent';
-import DialogActions from '@mui/joy/DialogActions';
-import Modal from '@mui/joy/Modal';
-import ModalDialog from '@mui/joy/ModalDialog';
-import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import { useNavigate } from "react-router-dom";
 
 export default function OverflowCard(props) {
     const [category,setCategory] = React.useState(props.categoryData)
     const [selectedCategoryId, setselectedCategoryId] = React.useState(null); 
-    const [open, setOpen] = React.useState(false);
 
+    const navigate = useNavigate();
+    const handleUpdate = (category,e)=>{
+      e.preventDefault();
+      navigate(`/GestionCategories/update/?id=${category.category_id}`);
+    };
 
-
-    // Function to handle delete action
     const handleDelete = () => {
-      // Perform delete action using selectedClientId
-      console.log("Deleting category with ID:", selectedCategoryId);
-      deleteCategory(selectedCategoryId).then((response) => {
-          console.log("Deleted category with ID:", selectedCategoryId);
-      })
-      setOpen(false);
-  };
-
-  
-
-  function AlertDialogModal() {
-    return (
-      <React.Fragment>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog variant="outlined" role="alertdialog">
-            <DialogTitle>
-              <WarningRoundedIcon />
-              Confirmation
-            </DialogTitle>
-            <Divider />
-            <DialogContent>
-              Voulez vous vraiment supprimer ce client
-            </DialogContent>
-            <DialogActions>
-              <Button variant="solid" color="danger" onClick={() => handleDelete()}>
-                Supprimer
-              </Button>
-              <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
-                Annuler
-              </Button>
-            </DialogActions>
-          </ModalDialog>
-        </Modal>
-      </React.Fragment>
-    );
-  }
+      // Call the toggleModal function passed as a prop and pass the client ID
+      props.toggleModal(category.category_id);
+    };
 
 
   return (
@@ -96,7 +58,7 @@ export default function OverflowCard(props) {
                 size="sm"
                 variant="outlined"
                 color="danger"
-                onClick={() => alert('Delete')}
+                onClick={handleDelete}
                 endDecorator={<CloseIcon />}
               >Supprimer</Chip>
 
@@ -104,7 +66,7 @@ export default function OverflowCard(props) {
                 size="sm"
                 variant="outlined"
                 color="primary"
-                onClick={() => alert('Delete')}
+                onClick={(e) => handleUpdate(category,e)}
                 endDecorator={<EditIcon />}
               >Modifier</Chip>
         </Stack>

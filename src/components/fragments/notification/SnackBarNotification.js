@@ -27,7 +27,7 @@ export default function SnackbarWithDecorators() {
           </Button>
         }
       >
-        Your message was sent successfully.
+        Your action was sent successfully.
       </Snackbar>
     </React.Fragment>
   );

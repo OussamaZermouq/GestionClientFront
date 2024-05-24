@@ -9,36 +9,13 @@ import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import CssBaseline from '@mui/joy/CssBaseline';
 import ExampleNavigationMenu from '../fragments/navigationBar/ExampleNavigationMenu';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
 import Add from '@mui/icons-material/Add';
-import ajouterClient from '../../api/client/AddClientService';
-import SnackbarHideDuration from '../fragments/notification/SnackBarNotification'
-import ajouterCategory from '../../api/Categories/AjouterCategoryDataService';
 
-
-
-export default function AjouterCategory() {
-  var [open, setOpen] = React.useState(false);
-
-  const handleButtonClick = () => {
-    setOpen(!open);
-  };
-
-  function handleSubmit(e){
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const formJson = Object.fromEntries(formData.entries());
-    var res = ajouterCategory(formJson);
-    res.then((value) => {
-      if (value===202){
-        handleButtonClick();
-      }
-    });
-  }
-
-  return (
-    <main>
-        <ExampleNavigationMenu />   
+export default function AjouterProduit() {
+    return <main>
+         <ExampleNavigationMenu />   
     <Card
       variant="outlined"
       sx={{
@@ -49,10 +26,10 @@ export default function AjouterCategory() {
         my:15
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form >
 
       <Typography level="title-lg" startDecorator={<Add />}>
-        Ajouter un categorie
+        Ajouter un produit
       </Typography>
       <Divider inset="none" />
       <CardContent
@@ -60,32 +37,45 @@ export default function AjouterCategory() {
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(80px, 1fr))',
           gap: 1.5,
-          my:3
         }}
       >
         <Box >
-          <Typography >Nom Categorie</Typography >
-          <Input name="titre" />
+          <Typography >Titre de produit</Typography >
+          <Input name="titreProduit" />
         </Box>
         
         <Box>
-          <Typography >Description categorie</Typography >
-          <Input name="description"/>
+          <Typography >Prix</Typography >
+          <Input name="prix"/>
+        </Box>
+        <Box>
+          <Typography >Couleur</Typography >
+          <Input name="couleur"/>
+        </Box>
+        <Box>
+          <Typography >Type</Typography >
+          <Input name="type"/>
+        </Box>
+        <Box>
+        <Typography >Category</Typography >
+
+          <Select name='status' defaultValue='OK'>
+              <Option value=""></Option>
+          </Select>
         </Box>
 
         <CardActions sx={{ gridColumn: '1/-1' }}>
           <Button variant="solid" color="primary" type='submit'>
-            Ajouter categorie
+            Ajouter produit
           </Button>
         </CardActions>
       </CardContent>
       </form>
     </Card>
 
-    {open && <SnackbarHideDuration />}
+    
     
     <CssBaseline />
+        
     </main>
-    
-  );
 }

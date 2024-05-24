@@ -13,20 +13,6 @@ import Box from '@mui/joy/Box';
 export default function ProductCard(props) {
     const [produitData, setProduitData] = React.useState(props.produitData);
 
-    
-    // example de structure
-    // {
-    //     "id_produit": 63,
-    //     "titre_produit": "Produit 1",
-    //     "type": "Telephone",
-    //     "couleur": "Blanc",
-    //     "prix": 4000.0,
-    //     "categorie": {
-    //         "category_id": 1,
-    //         "titre": "Electronique",
-    //         "description": "Produits d'électronique générale."
-    //     }
-    // }
     return (
         <Card sx={{ width: 320, maxWidth: '100%', boxShadow: 'lg' }}>
         
